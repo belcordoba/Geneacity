@@ -1,0 +1,24 @@
+[
+    {"first": {"mother": [1,2,3,4], 
+               "father":[0,5,6,7], 
+               "children": [986,376,8, 7466, 7364, 254]},
+      "Second": {"grandmother": [765, 67, 124, 654], 
+                 "grandfather": [6406, 75, 654, 234, 125], 
+                 "siblings": [657, 35, 4, 126, 789]},
+      "Third": {"great-grandfather": [4032,4343, 6478, 1324, 132], 
+                "great-grandmother": [326, 8372, 746,54,5, 736], 
+                "aunts_uncles": [3847, 2364, 235, 86, 243, 75], 
+                "nephew-niece": [2352, 4365, 4577,234, 7446]},
+      "Fourth": {"Great-great-grandfather": [326, 3294, 4032, 346, 9497], 
+                "Great-great-grandmother": [6347, 548, 238, 176, 1478],
+                "cousins": [1682, 2938, 864, 3457, 856],
+                "great-aunts_uncles": [664, 127, 598, 236, 4798],
+                "great-nephew-niece": [8423, 7456, 9827, 26, 7, 298] },
+      "Fifth": {"Great-great-great-grandfather": [6456, 2453,7564,3564,3527],
+                "Great-great-great-grandmother": [1342,5634,3425,7684,2756],
+                "Great-grandnephews/nieces": [2346,2341,746, 1463,5424,633],
+                "Great-granduncles/aunts": [3463,567,2342,5345,2342,356,2342],
+                "second uncles/aunts":[2342,45752,5675,2265,405,2353,5634]}
+        }
+    
+]
