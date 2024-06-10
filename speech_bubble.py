@@ -1,15 +1,15 @@
 import pygame
 
 def draw_speech_bubble(screen, text, text_color, bg_color, pos, size):
-    """_summary_
+    """Creates the speech bubble to display information.
 
     Args:
-        screen (_type_): _description_
-        text (_type_): _description_
-        text_color (_type_): _description_
-        bg_color (_type_): _description_
-        pos (_type_): _description_
-        size (_type_): _description_
+        screen (_type_): Window where the speech bubble will be shown.
+        text (_type_): Text that will be displayed by the speech bubble.
+        text_color (_type_): Color of the text that will be displayed by the speech bubble.
+        bg_color (_type_): Color of the background that will be displayed by the speech bubble.
+        pos (_type_): Position of the speech bubble.
+        size (_type_): Size of the speech bubble.
     """
     font = pygame.font.SysFont(None, size)
     text_surface = font.render(text, True, text_color)

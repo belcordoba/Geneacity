@@ -15,6 +15,8 @@ player_info_text = ""
 pygame.init()
 
 def main_menu():
+    """Displays the main menu and the actions for each button.
+    """
     global selected_text
     global selected_id
     global player_info

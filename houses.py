@@ -5,11 +5,25 @@ import json
 from arbol_g import *
 
 def read_json_file():
+    """Reads the JSON file with the family information.
+
+    Returns:
+        _type_: Returns the data available in the JSON file.
+    """
     with open('players_data.json', 'r') as file:
         data = json.load(file)
     return data
 
 def process_family_data(father, mother):
+    """Checks the family data to find any family relationships between the player and the habitant.
+
+    Args:
+        father (_type_): Receives the father of the habitant.
+        mother (_type_): Receives the mother of the habitant.
+
+    Returns:
+        _type_: Returns if a relationship was found or not.
+    """
     print(f"Processing family data for father ID: {father}, mother ID: {mother}")
     for family in House.family_data:
         for key, relationships in family.items():
@@ -28,6 +42,11 @@ def process_family_data(father, mother):
     return False
 
 class House(pygame.sprite.Sprite):
+    """Class used to create new houses.
+
+    Args:
+        pygame (_type_): Sprites done with Pygame.
+    """
     def __init__(self, ID, cord_x, cord_y, occupants, group):
         super().__init__(group)
         self.id = ID
@@ -41,6 +60,11 @@ class House(pygame.sprite.Sprite):
         self.houses_data = []
 
     def update(self, player_rect):
+        """Checks if the player is touching the house so it can show the habitant information.
+
+        Args:
+            player_rect (_type_): Receives information about the player.
+        """
         if self.rect.colliderect(player_rect):
             self.show_speech_bubble = True
         else:
@@ -53,7 +77,21 @@ import Buttons
 from tkinter import messagebox
 
 class House(pygame.sprite.Sprite):
+    """Class used to create the house sprites.
+
+    Args:
+        pygame (_type_): Sprites done with Pygame.
+    """
     def __init__(self, ID, cord_x, cord_y, occupants, group):
+        """Creates a house instance with the information of the house.
+
+        Args:
+            ID (_type_): ID of the house.
+            cord_x (_type_): Coordinates in x for the house.
+            cord_y (_type_): Coordinates in y for the house.
+            occupants (_type_): Information of the habitants of the house.
+            group (_type_): Group of the objects used for the camera.
+        """
         super().__init__(group)
         self.id = ID
         self.cord_x = int(cord_x)
@@ -66,12 +104,23 @@ class House(pygame.sprite.Sprite):
         self.houses_data = []
 
     def update(self, player_rect):
+        """Checks if the player is touching the house, and shows or hides the information with the occupants.
+
+        Args:
+            player_rect (_type_): Receives information about the player.
+        """
         if self.rect.colliderect(player_rect):
             self.show_speech_bubble = True
         else:
             self.show_speech_bubble = False
 
     def draw(self, screen, offset):
+        """Shows the buttons and information of the occupants of the house.
+
+        Args:
+            screen (_type_): Window where the information will be shown.
+            offset (_type_): Position to put the information bubble.
+        """
         get_parents_button_img = pygame.image.load(r'buttonsimg\get_parents.png').convert_alpha()
         marry_button_img = pygame.image.load(r'buttonsimg\marry.png').convert_alpha()
         offset_pos = (self.rect.topleft[0] - offset[0], self.rect.topleft[1] - offset[1])
@@ -95,7 +144,6 @@ class House(pygame.sprite.Sprite):
                 if occupant[3] == "Single":
                     marry_button = Buttons.Button((offset_pos[0]+offset_buttons+35), (offset_pos[1] + (i * -30) - 14), marry_button_img, 0.3)
                     marry_button.draw(screen)
-                        #
 
 
 House.family_data = read_json_file()

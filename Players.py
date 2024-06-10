@@ -5,17 +5,17 @@ move_left = ['images\l.1.png', 'images\l.2.png', 'images\l.3.png', 'images\l.4.p
 move_up = ['images\d.1.png', 'images\d.2.png', 'images\d.3.png', 'images\d.4.png']
 move_down = ['images\\a.1.png', 'images\\a.2.png', 'images\\a.3.png', 'images\\a.4.png']
 class Player(pygame.sprite.Sprite):
-    """_summary_
+    """Class used to create the image of the player in game.
 
     Args:
-        pygame (_type_): _description_
+        pygame (_type_): Sprites done with Pygame.
     """
     def __init__(self, pos, group):
-        """_summary_
+        """Creates the instance of the player sprite.
 
         Args:
-            pos (_type_): _description_
-            group (_type_): _description_
+            pos (_type_): Receives the position of the sprite.
+            group (_type_): Group of the objects used for the camera.
         """
         super().__init__(group)
         self.images = {
@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
         self.current_images = self.images['down']
 
     def handle_input(self):
-        """_summary_
+        """Shows the different images according to the key pressed by the player.
         """
         keys = pygame.key.get_pressed()
         
@@ -55,7 +55,7 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
 
     def update(self):
-        """_summary_
+        """Update the image shown according to the direction and speed.
         """
         self.handle_input()
         self.rect.center += self.direction * self.speed
@@ -67,11 +67,11 @@ class Player(pygame.sprite.Sprite):
             self.image = self.current_images[int(self.index)]
 
     def draw(self, screen, offset):
-        """_summary_
+        """Shows the image on the screen.
 
         Args:
-            screen (_type_): _description_
-            offset (_type_): _description_
+            screen (_type_): Window where the image will be shown.
+            offset (_type_): Position of the sprite on the screen.
         """
         offset_pos = (self.rect.topleft[0] - offset[0], self.rect.topleft[1] - offset[1])
         screen.blit(self.image, offset_pos)

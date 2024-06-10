@@ -19,7 +19,15 @@ house_list = []
 selected_id = ""
 
 class Game:
+    """Class used to create the game instance.
+    """
     def __init__(self, player_info, player_info_text):
+        """Creates a new instance with the game data.
+
+        Args:
+            player_info (_type_): Receives the information about the selected player, if given.
+            player_info_text (_type_): Receives the information in text format about the selected player, if given.
+        """
         pygame.init()
         
         self.screen_size = (1000, 750)
@@ -53,6 +61,8 @@ class Game:
         self.active_player = None
         
     def load_buttons(self):
+        """Creates the buttons that will be shown on screen during the game.
+        """
         see_tree_button_img = pygame.image.load(r'buttonsimg\resume.png').convert_alpha()
         back_button_img = pygame.image.load(r'buttonsimg\view_tree.png').convert_alpha()
         save_button_img = pygame.image.load(r'buttonsimg\exit.jpg').convert_alpha()
@@ -76,6 +86,12 @@ class Game:
         self.music_button = Buttons.Button(800, 30, music_img, 1)
 
     def load_houses(self, player_x=0, player_y=0):
+        """Loads the information of the houses and shows them on screen using the API.
+
+        Args:
+            player_x (int, optional): Receives the location in x of the player. Defaults to 0.
+            player_y (int, optional): Receives the location in y of the player. Defaults to 0.
+        """
         global api_x
         global api_y
         global house_list
@@ -117,6 +133,8 @@ class Game:
                                 house_list.append(House(house_id, cord_x, cord_y, self.houses_data, group=self.camera_group))
     
     def load_names(self):
+        """Loads the names of the players that are available using the API.
+        """
         self.players_data = []
         
         while True:
@@ -141,7 +159,9 @@ class Game:
         print(f"Loaded players: {self.players_data}")
 
     def draw_text(self):
-        self.screen.blit(self.image, (60, 40))
+        """Shows the text on screen with information about the players that can be chosen.
+        """
+        self.screen.blit(self.image, (720, 40))
         self.text_rects = []
         y_offset = 170 + self.scroll_offset
         for player in self.players_data:
@@ -153,6 +173,11 @@ class Game:
             y_offset += 50
 
     def check_click(self, pos):
+        """Checks for clicks from the player to find the choice made by them.
+
+        Args:
+            pos (_type_): Receives the position where the player clicked.
+        """
         global selected_id
         global selected_text
         for text_rect, player in self.text_rects:
@@ -166,22 +191,37 @@ class Game:
                 break
 
     def scroll(self, dy):
+        """Allows the player to scroll through the options given by the API.
+
+        Args:
+            dy (_type_): Receives the movement done to show more names.
+        """
         self.scroll_offset += dy
         self.scroll_offset = max(min(self.scroll_offset, 0), -len(self.players_data) * 50 + self.screen_size[1] - 100)
 
     def draw(self, screen, offset):
+        """Shows the image on the screen for the player selection.
+
+        Args:
+            screen (_type_): Receives the window where it will be shown.
+            offset (_type_): Receives the position where it will be shown.
+        """
         offset_pos = self.rect.topleft - offset
         screen.blit(self.image, offset_pos)
         if self.show_speech_bubble:
             draw_speech_bubble(screen, f'people {self.occupants}', (0, 0, 0), (255, 255, 255), offset_pos, 25)
     
     def populate_trees(self):
+        """Adds trees on the game
+        """
         for num in range(20):
-            random_x = randint(0, 1000)
-            random_y = randint(0, 1000)
+            random_x = randint(0, 5000)
+            random_y = randint(0, 5000)
             Trees((random_x, random_y), self.camera_group)
 
     def run(self):
+        """Used for the main execution of the game.
+        """
         global selected_id
         global player_info_text
         while True:
@@ -210,6 +250,8 @@ class Game:
             self.clock.tick(60)
     
     def update_music(self):
+        """Used to play music if the player wishes to do so.
+        """
         if self.music_playing:
             if self.mute_button.draw(self.screen):
                 pygame.mixer.music.stop()
@@ -221,11 +263,15 @@ class Game:
                 self.music_playing = True
 
     def check_collisions(self):
+        """Checks if the player is behind a house sprite so it doesn't get covered.
+        """
         for sprite in self.camera_group.sprites():
             if isinstance(sprite, House):
                 sprite.update(self.player.rect)
 
     def show_tree(self):
+        """Shows the tree with family information to the player.
+        """
         tree_window = pygame.display.set_mode((width, height))  
         tree = Arbol(10)
         values = [0, 1]
@@ -237,6 +283,11 @@ class Game:
         pygame.time.wait(5000) 
 
     def draw(self):
+        """Shows the different buttons available in the game execution.
+
+        Returns:
+            _type_: Returns the player's x and y positions.
+        """
         self.screen.fill((255, 255, 255))
         player_x, player_y = self.player.rect.topleft
         bg_width, bg_height = self.background.get_size()
