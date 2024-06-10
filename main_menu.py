@@ -27,6 +27,7 @@ def main_menu():
     pygame.display.set_caption('GeneaCity')
     clock = pygame.time.Clock()
     command = 'start'
+    logo_img = pygame.image.load(r'otherimg\logo.png').convert_alpha()
     start_button_img = pygame.image.load(r'buttonsimg\play.jpg').convert_alpha()
     load_button_img = pygame.image.load(r'buttonsimg\load.jpg').convert_alpha()
     exit_button_img = pygame.image.load(r'buttonsimg\exit.jpg').convert_alpha()
@@ -34,6 +35,7 @@ def main_menu():
     back_img = pygame.transform.scale(back_button_img, (140, 90))
     game_img = pygame.transform.scale(start_button_img, (140, 90))
 
+    logo = Buttons.Button(350, 50, logo_img, 1)
     start_button = Buttons.Button(400, 350, start_button_img, 1)
     load_button = Buttons.Button(400, 450, load_button_img, 1)
     exit_button = Buttons.Button(400, 550, exit_button_img, 1)
@@ -63,6 +65,7 @@ def main_menu():
                     
         screen.fill(bg_color)
         if command == 'start':
+            logo.draw(screen)
             if start_button.draw(screen):
                 command = 'player'
             if load_button.draw(screen):
