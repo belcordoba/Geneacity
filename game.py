@@ -17,6 +17,7 @@ import random
 api_x = 251
 api_y = 251
 house_list = []
+selected_id = ""
 
 class Game:
     def __init__(self, player_info, player_info_text):
