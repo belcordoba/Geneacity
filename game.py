@@ -13,7 +13,6 @@ from arbol_g import *
 from tkinter import messagebox
 import random
 
-
 api_x = 251
 api_y = 251
 house_list = []
@@ -263,7 +262,6 @@ class Game:
             self.mute_button.draw(self.screen)
         else:
             self.music_button.draw(self.screen)
-        
         
         if self.option_button.draw(self.screen):
             self.options_menu_active = True

@@ -3,6 +3,8 @@ import Buttons
 
 
 def menu():
+    """_summary_
+    """
     pygame.init()
 
     screen_size = (100, 100)

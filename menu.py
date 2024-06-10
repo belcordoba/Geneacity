@@ -6,7 +6,6 @@ pygame.init()
 
 pygame.init()
 
-
 bg_color = (184, 236, 245)
 screen_size = (1000, 750)
 screen = pygame.display.set_mode(screen_size)
@@ -25,4 +24,3 @@ while True:
     screen.fill(bg_color)
     pygame.display.flip()
     clock.tick(60)
-

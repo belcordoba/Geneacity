@@ -1,6 +1,16 @@
 import pygame
 
 def draw_speech_bubble(screen, text, text_color, bg_color, pos, size):
+    """_summary_
+
+    Args:
+        screen (_type_): _description_
+        text (_type_): _description_
+        text_color (_type_): _description_
+        bg_color (_type_): _description_
+        pos (_type_): _description_
+        size (_type_): _description_
+    """
     font = pygame.font.SysFont(None, size)
     text_surface = font.render(text, True, text_color)
     text_rect = text_surface.get_rect(center=pos)

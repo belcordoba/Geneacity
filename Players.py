@@ -1,12 +1,22 @@
 import pygame
 
-
 move_right = ['images\\r.1.png', 'images\\r.2.png', 'images\\r.3.png', 'images\\r.4.png']
 move_left = ['images\l.1.png', 'images\l.2.png', 'images\l.3.png', 'images\l.4.png']
 move_up = ['images\d.1.png', 'images\d.2.png', 'images\d.3.png', 'images\d.4.png']
 move_down = ['images\\a.1.png', 'images\\a.2.png', 'images\\a.3.png', 'images\\a.4.png']
 class Player(pygame.sprite.Sprite):
+    """_summary_
+
+    Args:
+        pygame (_type_): _description_
+    """
     def __init__(self, pos, group):
+        """_summary_
+
+        Args:
+            pos (_type_): _description_
+            group (_type_): _description_
+        """
         super().__init__(group)
         self.images = {
             'right': [pygame.image.load(img).convert_alpha() for img in move_right],
@@ -22,6 +32,8 @@ class Player(pygame.sprite.Sprite):
         self.current_images = self.images['down']
 
     def handle_input(self):
+        """_summary_
+        """
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_UP]:
@@ -43,6 +55,8 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
 
     def update(self):
+        """_summary_
+        """
         self.handle_input()
         self.rect.center += self.direction * self.speed
 
@@ -53,5 +67,11 @@ class Player(pygame.sprite.Sprite):
             self.image = self.current_images[int(self.index)]
 
     def draw(self, screen, offset):
+        """_summary_
+
+        Args:
+            screen (_type_): _description_
+            offset (_type_): _description_
+        """
         offset_pos = (self.rect.topleft[0] - offset[0], self.rect.topleft[1] - offset[1])
         screen.blit(self.image, offset_pos)

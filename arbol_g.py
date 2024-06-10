@@ -21,15 +21,33 @@ back_img = pygame.transform.scale(back_button_img, (140, 90))
 back_button = Buttons.Button(780, 600, back_img, 1)
 
 class Arbol():
+    """Creates the tree that will be used for the game.
+    """
     def __init__(self, valor:int) -> None:
+        """Creates the individual nodes for the tree.
+
+        Args:
+            valor (int): Receives the value for the node.
+        """
         self.iz: Arbol = None
         self.der: Arbol = None
         self.valor = valor
 
     def insertar(self, nuevo_valor) -> None:
+        """Inserts a new node on the tree.
+
+        Args:
+            nuevo_valor (_type_): Receives the value for the new node.
+        """
         self.__insertar(nuevo_valor, self)
 
     def __insertar(self, nuevo_valor, raiz) -> None:
+        """Inserts a new node on the tree.
+
+        Args:
+            nuevo_valor (_type_): Receives the value for the new node.
+            raiz (_type_): Receives the tree where the node will be added.
+        """
         if nuevo_valor <= raiz.valor:
             if raiz.iz is None:
                 raiz.iz = Arbol(nuevo_valor)
@@ -42,9 +60,26 @@ class Arbol():
                 self.__insertar(nuevo_valor, raiz.der)
 
     def existe(self, valor) -> bool:
+        """Verifies if the node already exists on the tree.
+
+        Args:
+            valor (_type_): Receives the value that will be checked.
+
+        Returns:
+            bool: Returns if the node exists or not.
+        """
         return self.__existe(valor, self)
 
     def __existe(self, valor, raiz) -> bool:
+        """Verifies if the node already exists on the tree.
+
+        Args:
+            valor (_type_): Receives the value that will be checked.
+            raiz (_type_): Receives the tree where the node will be checked.
+
+        Returns:
+            bool: Returns if the node exists or not.
+        """
         if raiz:
             if valor == raiz.valor:
                 return True
@@ -56,11 +91,25 @@ class Arbol():
             return False
 
     def ver_arbol(self, window) -> None:
+        """Lets the player see the tree.
+
+        Args:
+            window (_type_): Receives the window where the image will be shown.
+        """
         window.fill(WHITE)
         self.__ver_arbol(window, 0, width, 40, self)
         pygame.display.flip()
 
     def __ver_arbol(self, window, xmin, xmax, y, raiz) -> None:
+        """Shows the tree.
+
+        Args:
+            window (_type_): Receives the window where the image will be shown.
+            xmin (_type_): Receives the minimum allowed for window x size.
+            xmax (_type_): Receives the maximum allowed for window x size.
+            y (_type_): Receives the value for window y size.
+            raiz (_type_): Receives the tree used to build the image.
+        """
         if raiz:
             x = xmin + (xmax - xmin) / 2
             if raiz.iz:
@@ -78,6 +127,8 @@ class Arbol():
             self.__ver_arbol(window, x, xmax, y + 80, raiz.der)
 
 def main():
+    """Shows the tree on the game.
+    """
     raiz = Arbol(valor=10)
     l = [5, 8, 4, 15, 6, 2, 1, 3, 7, 10, 15, 48, 63, 41, -2, -5]
     for x in l:

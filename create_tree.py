@@ -21,17 +21,32 @@ back_img = pygame.transform.scale(back_button_img, (140, 90))
 back_button = Buttons.Button(1000, 750, back_img, 1)
 
 class Nodo:
+    """Class used to create a new node for the tree.
+    """
     def __init__(self, nivel, posicion, padre=None):
+        """Creates a new node for the tree.
+
+        Args:
+            nivel (_type_): Receives the location of the node according to the level.
+            posicion (_type_): Receives the position of the node.
+            padre (_type_, optional): Receives the information of the parent of the node. Defaults to None.
+        """
         self.valor = None
         self.nivel = nivel
         self.padre = padre
         self.posicion = posicion
 
 class ArbolGenealogico:
+    """Class used to create the tree.
+    """
     def __init__(self):
+        """Creates the tree with the list of nodes.
+        """
         self.nodos = []
 
     def crear_nodos(self):
+        """Creates the nodes on the tree.
+        """
         niveles = 5  # Número de niveles en el árbol
         nodos_por_nivel = [1, 2, 4, 8, 16]  # Nodos por nivel
         for nivel in range(niveles):
@@ -45,10 +60,22 @@ class ArbolGenealogico:
                 self.nodos.append(Nodo(nivel, (x, y), padre))
 
     def agregar_valor(self, valor, nivel, nodo_index):
+        """Adds the values to the tree.
+
+        Args:
+            valor (_type_): Receives the value of the node.
+            nivel (_type_): Receives the level where the node is located.
+            nodo_index (_type_): Receives the index of the node.
+        """
         nodo = self.nodos[nivel * (nivel + 1) // 2 + nodo_index]
         nodo.valor = valor
 
     def ver_arbol(self, window):
+        """Allows the plaeyr to see the tree.
+
+        Args:
+            window (_type_): Receives the window where the tree will be shown.
+        """
         window.fill(WHITE)
 
         # Dibujar las líneas primero
@@ -69,9 +96,11 @@ class ArbolGenealogico:
         pygame.display.flip()
 
 def main():
+    """Calls the functions to build the tree and show it on screen.
+    """
     arbol = ArbolGenealogico()
     arbol.crear_nodos()
-     
+
     arbol.agregar_valor(1, 0, 0)  # Nivel 0, nodo 0
     arbol.agregar_valor(2, 1, 0)  # Nivel 1, nodo 0
     arbol.agregar_valor(3, 1, 1)  # Nivel 1, nodo 1
